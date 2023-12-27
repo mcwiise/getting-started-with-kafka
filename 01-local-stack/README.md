@@ -3,29 +3,29 @@
 ### Running a single instance
 
 ```shell
-cd single-instance
-docker-compose up -d --build
+cd 01-local-stack
+docker compose -f single-instance.yml up -d --build
 # check contaner logs
-docker container logs --follow zookeeper3
-docker container logs --follow kafka3
+docker container logs --follow zookeeper
+docker container logs --follow kafka
 # open 2 terminals to produce and consume a dummy message
-docker container exec -u root -it kafka3 /bin/bash
-kafka-console-producer.sh --bootstrap-server localhost:9092 --topic first_topic
-kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first_topic --from-beginning
+docker container exec -it kafka /bin/bash
+kafka-console-producer --bootstrap-server localhost:9092 --topic first_topic
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --from-beginning
 ```
 
 ### Running a multi broker cluster
 
 ```shell
-cd multi-broker
-docker-compose up -d --build
+cd 01-local-stack
+docker compose -f multi-broker.yml up -d --build
 # check contaner logs
-docker container logs --follow zookeeper3
-docker container logs --follow kafka31
-docker container logs --follow kafka32
-docker container logs --follow kafka33
+docker container logs --follow zookeeper
+docker container logs --follow kafka1
+docker container logs --follow kafka2
+docker container logs --follow kafka3
 # open 2 terminals to produce and consume a dummy message
-docker container exec -u root -it kafka31 /bin/bash
-kafka-console-producer.sh --bootstrap-server localhost:7071 --topic first_topic
-kafka-console-consumer.sh --bootstrap-server localhost:7071 --topic first_topic --from-beginning
+docker container exec -it kafka1 /bin/bash
+kafka-console-producer --bootstrap-server localhost:9092 --topic first_topic
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic --from-beginning
 ```
