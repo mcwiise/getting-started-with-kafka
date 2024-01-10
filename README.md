@@ -1,5 +1,7 @@
 # Getting started with Kafka Workshop
 
+- Install [docker](https://www.docker.com/products/docker-desktop/)
+
 ### Running a single instance
 
 ```shell
