@@ -54,16 +54,17 @@ kafka-console-producer --bootstrap-server localhost:9092 --topic topic3 --proper
 
 ```shell
 docker container exec -it kafka1 /bin/bash
-
 # Create a topic with 2 partitions
 kafka-topics --bootstrap-server localhost:9092 --topic topic4 --create --partitions 2
-# Start a consumer in a consumer group first-app
-kafka-console-consumer --bootstrap-server localhost:9092 --topic topic4 --group first-app
 # Produce messages round robin
 kafka-console-producer --bootstrap-server localhost:9092 --producer-property partitioner.class=org.apache.kafka.clients.producer.RoundRobinPartitioner --topic topic4
+# Start a consumer in a consumer group first-app
+kafka-console-consumer --bootstrap-server localhost:9092 --topic topic4 --group first-app
 # Start another consumer in the same consumer group first-app
 # Check messages being spread
 kafka-console-consumer --bootstrap-server localhost:9092 --topic topic4 --group first-app
 # Start a new consumer and check it gets idle
 kafka-console-consumer --bootstrap-server localhost:9092 --topic topic4 --group first-app
+# Check idle consumers are not subscribed
+kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group first-app
 ```
