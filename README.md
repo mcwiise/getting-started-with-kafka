@@ -54,8 +54,8 @@ kafka-console-producer --bootstrap-server localhost:9092 --topic topic3 --proper
 
 ```shell
 docker container exec -it kafka1 /bin/bash
-# Create a topic with 2 partitions
-kafka-topics --bootstrap-server localhost:9092 --topic topic4 --create --partitions 2
+# Create a topic with 3 partitions
+kafka-topics --bootstrap-server localhost:9092 --topic topic4 --create --partitions 3
 # Produce messages round robin
 kafka-console-producer --bootstrap-server localhost:9092 --producer-property partitioner.class=org.apache.kafka.clients.producer.RoundRobinPartitioner --topic topic4
 # Start a consumer in a consumer group first-app
