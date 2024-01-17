@@ -61,10 +61,12 @@ kafka-console-producer --bootstrap-server localhost:9092 --producer-property par
 # Start a consumer in a consumer group first-app
 kafka-console-consumer --bootstrap-server localhost:9092 --topic topic4 --group first-app
 # Start another consumer in the same consumer group first-app
-# Check messages being spread
+kafka-console-consumer --bootstrap-server localhost:9092 --topic topic4 --group first-app
+# Start another consumer in the same consumer group first-app
+# Check messages are being spread accross all consumers
 kafka-console-consumer --bootstrap-server localhost:9092 --topic topic4 --group first-app
 # Start a new consumer and check it gets idle
 kafka-console-consumer --bootstrap-server localhost:9092 --topic topic4 --group first-app
-# Check idle consumers are not subscribed
+# Describe the first-app consumer group
 kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group first-app
 ```
